@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Gate;
 class questionController extends Controller
 {
 
-    public function __construct() {
+    /*public function __construct() {
         $this->middleware('auth',
             [
                 'expect' => ['index', 'show']
             ]
         );
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *

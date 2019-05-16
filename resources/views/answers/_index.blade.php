@@ -17,10 +17,23 @@
                                 <a href="" title="This Answer is not useful" class="vote-down off">
                                     <i class="fas fa-caret-down fa-3x"></i>
                                 </a>
-                                <a href="" title="Click to mark as a favourite Answer (Double click to undo)" class="{{ $answer->status }} mt-2">
-                                    <i class="fas fa-check"></i>
-                                    <span class="favourite-count">123</span>
-                                </a>
+                                @can('accept', $answer)
+                                    <a href=""
+                                       title="Click to mark as a favourite Answer (Double click to undo)"
+                                       class="{{ $answer->status }} mt-2"
+                                       onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
+                                    >
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                    <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST" style="display: none">
+                                        @csrf
+
+                                    </form>
+                                    @else
+                                    @if($answer->is_best)
+                                        <a href="" title="Best Answer" class="{{ $answer->status }} mt-2">
+                                    @endif
+                                @endcan
                             </div>
                             <div class="media-body">
                                 {!! $answer->body_html !!}
