@@ -36,7 +36,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="ml-auto">
 
-                                            @can('update-question', $question)
+                                            @can('update', $question)
                                                 <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">
                                                     Edit
                                                 </a>

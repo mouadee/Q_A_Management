@@ -70,7 +70,7 @@ class AnswerController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
-        $this->authorize('delete', 'answer');
+        $this->authorize('delete', $answer);
 
         $answer->delete();
 

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AskQuestionRequest;
 use App\Question;
-use Illuminate\Support\Facades\Gate;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class questionController extends Controller
 {
@@ -20,7 +23,7 @@ class questionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -32,7 +35,7 @@ class questionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -44,8 +47,8 @@ class questionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param AskQuestionRequest $request
+     * @return Response
      */
     public function store(AskQuestionRequest $request)
     {
@@ -57,8 +60,8 @@ class questionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
      */
     public function show(Question $question)
     {
@@ -70,8 +73,9 @@ class questionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
+     * @throws AuthorizationException
      */
     public function edit(Question $question)
     {
@@ -92,9 +96,10 @@ class questionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param AskQuestionRequest $request
+     * @param Question $question
+     * @return Response
+     * @throws AuthorizationException
      */
     public function update(AskQuestionRequest $request, Question $question)
     {
@@ -115,19 +120,20 @@ class questionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
+     * @param Question $question
+     * @return Response
+     * @throws Exception
      */
     public function destroy(Question $question)
     {
 
-        /*if (Gate::denies('delete-question', $question)) {
+       /* if (Gate::denies('delete-question', $question)) {
 
             abort('403', 'Access Denied');
 
         }*/
 
-        $this->authorize('delete', $question);
+        $this->authorize('delete-question', $question);
 
         $question->delete();
 

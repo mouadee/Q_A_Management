@@ -13,8 +13,8 @@ class AnswerPolicy
     /**
      * Determine whether the user can update the answer.
      *
-     * @param  \App\User  $user
-     * @param  \App\Answer  $answer
+     * @param User $user
+     * @param Answer $answer
      * @return mixed
      */
     public function update(User $user, Answer $answer)
@@ -25,8 +25,8 @@ class AnswerPolicy
     /**
      * Determine whether the user can delete the answer.
      *
-     * @param  \App\User  $user
-     * @param  \App\Answer  $answer
+     * @param User $user
+     * @param Answer $answer
      * @return mixed
      */
     public function delete(User $user, Answer $answer)
@@ -37,8 +37,8 @@ class AnswerPolicy
     /**
      * Determine whether the user can restore the answer.
      *
-     * @param  \App\User  $user
-     * @param  \App\Answer  $answer
+     * @param User $user
+     * @param Answer $answer
      * @return mixed
      */
     public function restore(User $user, Answer $answer)
@@ -49,8 +49,8 @@ class AnswerPolicy
     /**
      * Determine whether the user can permanently delete the answer.
      *
-     * @param  \App\User  $user
-     * @param  \App\Answer  $answer
+     * @param User $user
+     * @param Answer $answer
      * @return mixed
      */
     public function forceDelete(User $user, Answer $answer)
