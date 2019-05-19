@@ -60,4 +60,24 @@ class Question extends Model
         $this->best_answer_id = $answer->id;
         $this->save();
     }
+
+    public function favourites()
+    {
+        $this->belongsToMany(User::class, 'favourites')->withTimestamps();
+    }
+
+    public function isFavourites()
+    {
+        return $this->favourites()->where('user_id', auth()->id())->count() > 0;
+    }
+
+    public function getIsFavouritesAttribute()
+    {
+        return $this->isFavourites();
+    }
+
+    public function getFavouritesCountAttribute()
+    {
+        return $this->Favourites->count();
+    }
 }
